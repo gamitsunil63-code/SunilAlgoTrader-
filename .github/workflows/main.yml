@@ -25,8 +25,7 @@ jobs:
           rm -rf project
           mkdir project
           unzip -q SunilAlgoTrader_Android_V3_1_Final_Java18.zip -d project
-          mv project/sunilv3/* project/
-          rm -rf project/sunilv3
+          unzip -q SunilAlgoTrader_Android_V3_1_Final_Java18.zip -d project
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
