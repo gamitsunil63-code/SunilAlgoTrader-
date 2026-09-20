@@ -30,7 +30,17 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: '8.10.2'
-
+      - name: Fix JVM target
+        working-directory: project
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("app/build.gradle.kts")
+          s = p.read_text()
+          s = s.replace("JavaVersion.VERSION_1_8", "JavaVersion.VERSION_17")
+          s = s.replace('jvmTarget = "1.8"', 'jvmTarget = "17"')
+          p.write_text(s)
+          PY
       - name: Build Debug APK
         working-directory: project
         run: gradle assembleDebug
